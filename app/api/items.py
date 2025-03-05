@@ -1,7 +1,7 @@
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
-from app.db.operations import get_items
-from app.schemas.item import ItemResponse
+from app.db.operations import get_items, create_item
+from app.schemas.item import ItemResponse, ItemCreate 
 from app.db.session import get_db
 
 router = APIRouter()
@@ -12,3 +12,8 @@ async def read_items(skip: int = Query(0, ge=0), limit: int = Query(10, ge=1, le
     if not items:
         raise HTTPException(status_code=404, detail="Items not found")
     return items
+
+@router.post("/", response_model=ItemResponse, status_code=status.HTTP_201_CREATED)
+async def create_item_endpoint(item_data: ItemCreate, db: Session = Depends(get_db)):
+    item = create_item(db, item_data)
+    return item
