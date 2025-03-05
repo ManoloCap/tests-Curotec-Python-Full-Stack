@@ -13,7 +13,7 @@ Make sure you have Python installed. You can download it from the [official Pyth
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/your-repo/tests-Curotec-Python-Full-Stack.git
+    git clone https://github.com/ManoloCap/tests-Curotec-Python-Full-Stack/tree/main
     cd tests-Curotec-Python-Full-Stack
 
 
