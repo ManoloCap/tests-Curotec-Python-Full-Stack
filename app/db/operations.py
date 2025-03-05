@@ -12,6 +12,9 @@ def init_db():
     
 ## ITEMS OPERATIONS
 
+def get_items_count(db_session: Session):
+    return db_session.query(Item).count()
+
 def get_items(db_session, skip: int = 0, limit: int = 10):
     return db_session.query(Item).offset(skip).limit(limit).all()
 
