@@ -3,3 +3,6 @@ uvicorn
 sqlalchemy
 databases
 pydantic
+httpx
+pytest
+pytest-asyncio
