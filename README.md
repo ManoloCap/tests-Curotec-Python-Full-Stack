@@ -28,7 +28,7 @@ Make sure you have Python installed. You can download it from the [official Pyth
     uvicorn app.main:app --reload
 
 
-4. TO RUN THE TETS:
+4. TO RUN THE TESTS:
     ```bash
     pytest
     ```
