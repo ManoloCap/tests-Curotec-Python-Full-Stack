@@ -5,9 +5,9 @@ from app.schemas.item import ItemResponse, ItemCreate
 from app.db.session import get_db
 import math
 
-router = APIRouter()
+items_router = APIRouter()
 
-@router.get("/", response_model=dict)
+@items_router.get("/", response_model=dict)
 async def read_items(
     page: int = Query(default=1, ge=1, description="Page number as a query parameter"),
     per_page: int = Query(default=10, ge=1, le=100, description="Number of items per page as a query parameter"),
@@ -33,7 +33,7 @@ async def read_items(
         "total_count": total_count
     }
 
-@router.post("/", response_model=ItemResponse, status_code=status.HTTP_201_CREATED)
+@items_router.post("/", response_model=ItemResponse, status_code=status.HTTP_201_CREATED)
 async def create_item_endpoint(item_data: ItemCreate, db: Session = Depends(get_db)):
     item = create_item(db, item_data)
     return item
