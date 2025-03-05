@@ -21,7 +21,7 @@ async def read_items(
     if not items and page != 1:
         raise HTTPException(status_code=404, detail="Page not found")
 
-    items_response = [ItemResponse.from_orm(item) for item in items]
+    items_response = [ItemResponse.model_validate(item) for item in items]
 
     total_pages = math.ceil(total_count / per_page)
 
