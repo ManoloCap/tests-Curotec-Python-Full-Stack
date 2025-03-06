@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
-from app.db.operations import get_items, create_item, get_items_count
+from app.db.operations import get_items, create_item, get_items_count, delete_item
 from app.schemas.item import ItemResponse, ItemCreate 
 from app.db.session import get_db
 import math
@@ -13,6 +13,7 @@ async def read_items(
     per_page: int = Query(default=10, ge=1, le=100, description="Number of items per page as a query parameter"),
     db: Session = Depends(get_db)
 ):
+    
     skip = (page - 1) * per_page
     limit = per_page
     items = get_items(db, skip=skip, limit=limit)
@@ -21,6 +22,7 @@ async def read_items(
     if not items and page != 1:
         raise HTTPException(status_code=404, detail="Page not found")
 
+    
     items_response = [ItemResponse.model_validate(item) for item in items]
 
     total_pages = math.ceil(total_count / per_page)
@@ -37,3 +39,13 @@ async def read_items(
 async def create_item_endpoint(item_data: ItemCreate, db: Session = Depends(get_db)):
     item = create_item(db, item_data)
     return item
+
+
+@items_router.delete("/{item_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_item_endpoint(item_id: int, db: Session = Depends(get_db)):
+    deleted = delete_item(db, item_id)
+
+    if not deleted:
+        raise HTTPException(status_code=404, detail="Item not found")
+
+    return {"detail": "Item successfully deleted"}

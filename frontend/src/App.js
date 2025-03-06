@@ -56,8 +56,8 @@ function App() {
     setCardsList(response.items)
   }
 
-  const handleDeletion = async () => {
-
+  const handleDelete = async (event) => {
+    console.log("Deleting ID: ", event)
   }
 
   const sendTemporalMessage = (message) => {
@@ -80,7 +80,7 @@ function App() {
           dataList={cardsList} 
           actions={
             {
-              deleteItem: handleDeletion,
+              handleDelete: handleDelete,
               fadeOutItems: fadeOutItems,
               itemsApiError:  itemsApiError
             }
