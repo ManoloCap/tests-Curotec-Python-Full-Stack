@@ -87,8 +87,37 @@
     /* Example hover styles for the element */
     background-color: #f5f2f2e3;
     transform: translateY(-5px);
+    cursor: pointer;
   }
   
+  .small-square:active {
+    /* Example hover styles for the element */
+    background-color: #a6a3a3e3;
+    transform: translateY(-5px);
+    cursor: pointer;
+  }
+
+  .small-square:active img{
+    opacity: 0.5;
+    animation: expandWidth 1s forwards;
+  }
+
+  .small-square img{
+    width: 60%;
+  }
+
+
+  /* Adding keyframes for the width transition */
+@keyframes expandWidth {
+  from {
+    width: 60%;
+  }
+  to {
+    width: 70%;
+  }
+}
+
+
   .small-square.fade-out {
     animation: fade-out-animation 1s forwards ease-out;
     pointer-events: none; /* Prevent hover events during fade-out */
@@ -117,3 +146,36 @@
   
 
   
+
+
+
+/* prevent Inputs to verflow */
+.createItemCard input[type="text"],
+.createItemCard textarea {
+    width: 100%; /* Make inputs and textarea take full width of the container */
+    padding: 8px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.createItemCard .add-item-input {
+    min-height: 80px; /* Adjust height as needed */
+    resize: vertical;
+}
+
+.createItemCard button {
+    margin: 5px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    background: linear-gradient(270deg, #ffffff, pink, #a1bff8);
+    background-size: 200% 100%;
+    color: black;
+    cursor: pointer;
+}
+
+.createItemCard button:hover {
+    background-color: #0056b3;
+}

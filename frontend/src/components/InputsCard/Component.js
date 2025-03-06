@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './style.css'; 
 
-const InputsCard = ({ page, setPage, perPage, setPerPage, totalPages, handleSearch }) => {
+const InputsCard = ({ page, setPage, perPage, setPerPage, totalPages, totalItems, handleSearch }) => {
   const [newPage, setNewPage] = useState(page);
   const [newPerPage, setNewPerPage] = useState(perPage);
 
@@ -21,16 +21,20 @@ const InputsCard = ({ page, setPage, perPage, setPerPage, totalPages, handleSear
     <div className="inputs-card-container">
         <div className="inputs-card-container-left">
             <div>
-                <label> <strong>Total Pages:</strong> </label>
-                <label htmlFor="page"> {totalPages} </label>
-            </div>
-            <div>
                 <label> <strong>Current Page:</strong> </label>
                 <label htmlFor="page"> {page} </label>
             </div>
             <div>
                 <label> <strong>Items Per Page:</strong> </label>
                 <label> {perPage} </label>
+            </div>
+            <div>
+                <label> <strong>Total Pages:</strong> </label>
+                <label htmlFor="page"> {totalPages} </label>
+            </div>
+            <div>
+                <label> <strong>Total Items in DB:</strong> </label>
+                <label> {totalItems} </label>
             </div>
         </div>
         <div className="inputs-card-container-right">

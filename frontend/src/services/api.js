@@ -19,6 +19,15 @@ export default class APIConnector {
               return errorData;
             }
             
+            console.log(" DOING THIS .... ")
+            if (errorData && Array.isArray(errorData.detail) &&
+                errorData.detail.length > 0 &&
+                errorData.detail[0].type &&
+                errorData.detail[0].msg) {
+                return { detail: errorData.detail[0].msg };
+            }
+
+            console.log("THEN? ")
             return null; 
           }
           return await response.json();
@@ -27,4 +36,56 @@ export default class APIConnector {
           return null;
         }
     }
+
+    async deleteItem(id) {
+        const url = `${this.baseUrl}/items/${id}`;
+        try {
+            const response = await fetch(url, { method: 'DELETE' });
+            if (!response) {
+                return null
+            }
+            return true
+
+        } catch (error) {
+            console.error("Network Error! ", error);
+            return null;
+        }
+    }
+
+
+    async createItem(name, description) {
+        const url = `${this.baseUrl}/items/`;
+        const payload = {
+            name,
+            description
+        };
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                // Handle error similarly to deleteItem
+                console.error("Error creating item! Status: ", response.status);
+                const errorData = await response.json().catch(() => null);
+                console.error("Error response data: ", errorData);
+                return null;
+            }
+
+            return await response.json(); // Assuming successful creation returns the created item
+
+        } catch (error) {
+            console.error("Network Error! ", error);
+            return null;
+        }
+    }
+
+    
 }
+
+

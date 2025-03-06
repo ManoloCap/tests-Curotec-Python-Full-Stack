@@ -56,8 +56,12 @@ function App() {
     setCardsList(response.items)
   }
 
-  const handleDelete = async (event) => {
-    console.log("Deleting ID: ", event)
+  const handleDelete = async (id) => {
+    console.log("Deleting ID: ", id)
+    await api.deleteItem(id)
+    setFadeOutItems(true)
+    await populateData(page,perPage)
+    setFadeOutItems(false)
   }
 
   const sendTemporalMessage = (message) => {
@@ -65,6 +69,13 @@ function App() {
     setTimeout(() => setItemsApiError(false), 5000);
   }
   
+  const createItem = async (newItem) => {
+    const new_item_response = await api.createItem(newItem.name, newItem.description)
+    console.log("POPULATE IT ... ", new_item_response,)
+    setFadeOutItems(true)
+    await populateData(page,perPage)
+    setFadeOutItems(false)
+  }
   return (
     <div className="App">
       <div className="AppLayout">
@@ -74,6 +85,7 @@ function App() {
           perPage={perPage}
           setPerPage={setPerPage}
           totalPages={totalPages}
+          totalItems={totalItems}
           handleSearch={handleSearch}
         />
         <ItemPanel 
@@ -82,7 +94,8 @@ function App() {
             {
               handleDelete: handleDelete,
               fadeOutItems: fadeOutItems,
-              itemsApiError:  itemsApiError
+              itemsApiError:  itemsApiError,
+              createItem: createItem
             }
           }
         />
