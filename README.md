@@ -27,9 +27,23 @@ Make sure you have Python installed. You can download it from the [official Pyth
     ```bash 
     uvicorn app.main:app --reload
 
+4. Run the Frontend App (REACT)
+ ![image](https://github.com/user-attachments/assets/359db063-aba6-4601-9667-92dd2af662dd)
+    ```bash 
+    pnpm install
+    pnpm start
 
-4. TO RUN THE TESTS:
+4. Check the Base URL Config.
+
+
+Running Tests
     ```bash
     pytest
     ```
     There is one test for Get Items endpoint
+
+
+
+
+
+  
