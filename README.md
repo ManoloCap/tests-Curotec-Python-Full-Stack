@@ -30,6 +30,7 @@ Make sure you have Python installed. You can download it from the [official Pyth
 4. Run the Frontend App (REACT)
  ![image](https://github.com/user-attachments/assets/359db063-aba6-4601-9667-92dd2af662dd)
     ```bash 
+    cd frontend
     pnpm install
     pnpm start
 
