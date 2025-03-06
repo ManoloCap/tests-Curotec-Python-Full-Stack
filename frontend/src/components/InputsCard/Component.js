@@ -6,11 +6,15 @@ const InputsCard = ({ page, setPage, perPage, setPerPage, totalPages, handleSear
   const [newPerPage, setNewPerPage] = useState(perPage);
 
   const pageOnChange = (event) => {
-    setPage(Number(event.target.value))
+    if(Number(event.target.value) > 0){
+        setPage(Number(event.target.value))
+    }
   }
 
   const perPageOnChange = (event) => {
-    setPerPage(Number(event.target.value))
+    if(Number(event.target.value) > 0){
+        setPerPage(Number(event.target.value))
+    }
   }
   
   return (

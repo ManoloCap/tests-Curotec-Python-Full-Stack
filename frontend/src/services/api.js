@@ -6,14 +6,25 @@ export default class APIConnector {
     async getItems(page, perPage) {
         const url = `${this.baseUrl}/items?per_page=${perPage}&page=${page}`;
         try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+          const response = await fetch(url);
+          if (!response.ok) {
+            // Parse the error response if possible
+            const errorData = await response.json().catch(() => null);
+            // Now handle the error response
+            console.log(`HTTP Error! Status: ${response.status}`);
+            console.log(errorData);
+      
+            if (response.status === 404 && errorData && errorData.detail) {
+              console.log("ERROR WITH DETAIL! ", errorData.detail);
+              return errorData;
             }
-            return await response.json();
+            
+            return null; 
+          }
+          return await response.json();
         } catch (error) {
-            console.error('Error fetching items:', error);
-            return null;
+          console.error("Network Error! ", error);
+          return null;
         }
     }
 }

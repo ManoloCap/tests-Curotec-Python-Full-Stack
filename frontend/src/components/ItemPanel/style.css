@@ -1,7 +1,8 @@
 .item-panel {
-    background-color: black;
     padding: 20px;
     box-sizing: border-box;
+    overflow: hidden;
+    height: 100%;
     overflow: hidden;
   }
   
@@ -10,13 +11,49 @@
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 10px;
     overflow-y: auto;
+    overflow: hidden;
+    
   }
   
+  .messageBarContainer {
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(270deg, #ffffff, pink, #a1bff8);
+    background-size: 200% 100%;
+    animation: gradient-shift 2s linear infinite;
+    color: black;
+    width: 100%;
+    border-radius: 5px;
+  }
+
+  .messageBarContainer label {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+@keyframes gradient-shift {
+    0% {
+    background-position: 100% 50%;
+    }
+  100% {
+    background-position: 0% 50%;
+    }
+  }
+
+  
   .small-square {
+    /* Existing styles */
     background-color: white;
     color: black;
     padding: 10px;
-    border: 1px solid black;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -26,11 +63,36 @@
     opacity: 0;
     transform: translateY(-20px);
     animation: fall-in-animation 0.5s forwards ease-out;
+    transition: background-color 0.3s, transform 0.3s;
   }
   
+  .small-square:hover {
+    /* Example hover styles for the element */
+    background-color: #f5f2f2e3;
+    transform: translateY(-5px);
+  }
+  
+  .small-square.fade-out {
+    animation: fade-out-animation 1s forwards ease-out;
+    pointer-events: none; /* Prevent hover events during fade-out */
+  }
+  
+  /* Keyframes */
   @keyframes fall-in-animation {
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
+  
+  @keyframes fade-out-animation {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+  
